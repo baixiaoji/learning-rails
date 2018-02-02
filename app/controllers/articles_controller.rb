@@ -1,17 +1,21 @@
 class ArticlesController < ApplicationController
     def index
-        @Articles = Article.all
+        @articles = Article.all
     end
     def show
-        @Article = Article.find(params[:id])
+        @article = Article.find(params[:id])
     end
     def new
+        @article = Article.new
     end
     def create
-        @Article = Article.new(article_params)
+        @article = Article.new(article_params)
 
-        @Article.save()
-        redirect_to @Article
+        if @article.save
+            redirect_to @article
+        else
+            render 'new'
+        end
     end
 
     private
